@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from src.preprocessing import load_data, clean_data, scale_features
 from src.clustering import run_kmeans
-from src.visualization import plot_clusters
+from src.visualization import plot_clusters, plot_silhouette_scores, plot_cluster_profiles
 
 st.title("🛒 Customer Segmentation Dashboard")
 
@@ -50,3 +50,9 @@ with tab2:
 with tab3:
     st.subheader("Cluster Visualization")
     plot_clusters(df_scaled, ["PurchaseFrequency", "AmountSpent"])
+
+    st.subheader("Silhouette Score Comparison")
+    plot_silhouette_scores(df_scaled, ["PurchaseFrequency", "AmountSpent"], max_k=10)
+
+    st.subheader("Cluster Profiles")
+    plot_cluster_profiles(df_scaled, ["PurchaseFrequency", "AmountSpent", "ProductTypes"])
